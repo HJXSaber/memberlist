@@ -690,3 +690,11 @@ func (m *Memberlist) changeNode(addr string, f func(*nodeState)) {
 	n := m.nodeMap[addr]
 	f(n)
 }
+
+func (m *Memberlist) GetNodeByName(name string) *Node {
+	if _, ok := m.nodeMap[name]; ok {
+		return &m.nodeMap[name].Node
+	} else {
+		return nil
+	}
+}
