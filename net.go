@@ -256,6 +256,10 @@ func (m *Memberlist) handleConn(conn net.Conn) {
 			return
 		}
 
+		if join && !m.config.Delegate.ValidateCert(userState) {
+			m.logger.Printf("[ERR] Cert is illegale, %s", LogConn(conn))
+			return
+		}
 		if err := m.sendLocalState(conn, join); err != nil {
 			m.logger.Printf("[ERR] memberlist: Failed to push local state: %s %s", err, LogConn(conn))
 			return

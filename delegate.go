@@ -34,4 +34,6 @@ type Delegate interface {
 	// remote side's LocalState call. The 'join'
 	// boolean indicates this is for a join instead of a push/pull.
 	MergeRemoteState(buf []byte, join bool)
+
+	ValidateCert(buf []byte) bool
 }
